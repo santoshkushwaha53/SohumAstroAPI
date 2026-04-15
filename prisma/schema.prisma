@@ -1,0 +1,164 @@
+// Prisma schema – SohumAstroAPI
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// ─── Enums ────────────────────────────────────────────────────────────────────
+
+enum SubscriptionTier {
+  FREE
+  STARTER
+  PRO
+  ENTERPRISE
+}
+
+enum JobStatus {
+  PENDING
+  PROCESSING
+  COMPLETED
+  FAILED
+}
+
+enum AstrologySystem {
+  VEDIC
+  WESTERN
+}
+
+// ─── Models ───────────────────────────────────────────────────────────────────
+
+model User {
+  id           String        @id @default(cuid())
+  email        String        @unique
+  name         String?
+  passwordHash String?
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @updatedAt
+
+  apiKeys      ApiKey[]
+  subscription Subscription?
+  savedCharts  SavedChart[]
+  chartRequests ChartRequest[]
+  reportJobs   ReportJob[]
+  auditLogs    AuditLog[]
+
+  @@map("users")
+}
+
+model ApiKey {
+  id          String   @id @default(cuid())
+  userId      String
+  keyHash     String   @unique
+  label       String?
+  scopes      String[] @default(["read"])
+  lastUsedAt  DateTime?
+  expiresAt   DateTime?
+  isActive    Boolean  @default(true)
+  createdAt   DateTime @default(now())
+
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([keyHash])
+  @@map("api_keys")
+}
+
+model Subscription {
+  id         String           @id @default(cuid())
+  userId     String           @unique
+  tier       SubscriptionTier @default(FREE)
+  startsAt   DateTime         @default(now())
+  endsAt     DateTime?
+  isActive   Boolean          @default(true)
+  metadata   Json?
+  createdAt  DateTime         @default(now())
+  updatedAt  DateTime         @updatedAt
+
+  user       User             @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("subscriptions")
+}
+
+model SavedChart {
+  id           String          @id @default(cuid())
+  userId       String
+  label        String
+  system       AstrologySystem
+  inputData    Json            // birth date/time/location
+  chartData    Json            // computed chart output
+  createdAt    DateTime        @default(now())
+
+  user         User            @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@map("saved_charts")
+}
+
+model ChartRequest {
+  id           String          @id @default(cuid())
+  userId       String?
+  endpoint     String
+  system       AstrologySystem
+  inputHash    String          // SHA-256 of canonical input for cache key
+  responseMs   Int?
+  statusCode   Int?
+  createdAt    DateTime        @default(now())
+
+  user         User?           @relation(fields: [userId], references: [id], onDelete: SetNull)
+
+  @@index([inputHash])
+  @@index([userId])
+  @@map("chart_requests")
+}
+
+model ReportJob {
+  id          String    @id @default(cuid())
+  userId      String
+  jobType     String
+  status      JobStatus @default(PENDING)
+  payload     Json
+  result      Json?
+  errorMsg    String?
+  queuedAt    DateTime  @default(now())
+  startedAt   DateTime?
+  completedAt DateTime?
+
+  user        User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId, status])
+  @@map("report_jobs")
+}
+
+model WebhookLog {
+  id          String   @id @default(cuid())
+  event       String
+  url         String
+  payload     Json
+  statusCode  Int?
+  attempts    Int      @default(0)
+  deliveredAt DateTime?
+  createdAt   DateTime @default(now())
+
+  @@index([event])
+  @@map("webhook_logs")
+}
+
+model AuditLog {
+  id         String   @id @default(cuid())
+  userId     String?
+  action     String
+  resource   String?
+  metadata   Json?
+  ipAddress  String?
+  userAgent  String?
+  createdAt  DateTime @default(now())
+
+  user       User?    @relation(fields: [userId], references: [id], onDelete: SetNull)
+
+  @@index([userId])
+  @@index([action])
+  @@map("audit_logs")
+}

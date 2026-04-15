@@ -1,0 +1,41 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(node -e ':*)",
+      "Bash(npm run:*)",
+      "Bash(ls /Users/santoshkushwaha/dev/SohumAstroAPI/*.json /Users/santoshkushwaha/dev/SohumAstroAPI/*.yml /Users/santoshkushwaha/dev/SohumAstroAPI/Dockerfile /Users/santoshkushwaha/dev/SohumAstroAPI/README.md /Users/santoshkushwaha/dev/SohumAstroAPI/.env.example)",
+      "Bash(npx ts-node:*)",
+      "Bash(docker-compose up:*)",
+      "Bash(docker compose:*)",
+      "Bash(brew services:*)",
+      "Bash(redis-cli ping:*)",
+      "Bash(pg_isready)",
+      "Bash(psql --version)",
+      "Bash(redis-server --version)",
+      "Bash(brew install:*)",
+      "Bash(/opt/homebrew/opt/redis/bin/redis-server /opt/homebrew/etc/redis.conf --daemonize yes)",
+      "Bash(/opt/homebrew/opt/redis/bin/redis-cli ping:*)",
+      "Bash(npx prisma:*)",
+      "Bash(echo \"PID: $!\")",
+      "Bash(ls node_modules/swisseph/*.d.ts)",
+      "Bash(ls node_modules/swisseph/lib/*.d.ts)",
+      "Bash(curl -s http://localhost:3000/api/v1/health)",
+      "Bash(curl -s http://localhost:3000/api/v1/astro/meta)",
+      "Bash(curl -s -X POST http://localhost:3000/api/v1/astro/planet-positions -H 'Content-Type: application/json' -H 'x-api-key: dev-master-key-change-me' -d '{\"date\":\"1988-08-01\",\"time\":\"12:00:00\",\"timezone\":\"+05:30\",\"mode\":\"sidereal\",\"ayanamsa\":\"LAHIRI\"}')",
+      "Bash(curl -s -X POST http://localhost:3000/api/v1/vedic/birth-chart -H 'Content-Type: application/json' -H 'x-api-key: dev-master-key-change-me' -d '{\"date\":\"1988-08-01\",\"time\":\"12:00:00\",\"timezone\":\"+05:30\",\"latitude\":25.4358,\"longitude\":81.8463,\"houseSystem\":\"W\",\"ayanamsa\":\"LAHIRI\"}')",
+      "Bash(curl -s -X POST http://localhost:3000/api/v1/vedic/dasha/vimshottari -H 'Content-Type: application/json' -H 'x-api-key: dev-master-key-change-me' -d '{\"date\":\"1988-08-01\",\"time\":\"12:00:00\",\"timezone\":\"+05:30\",\"latitude\":25.4358,\"longitude\":81.8463,\"ayanamsa\":\"LAHIRI\",\"yearsAhead\":10}')",
+      "Bash(curl -s -X POST http://localhost:3000/api/v1/western/birth-chart -H 'Content-Type: application/json' -H 'x-api-key: dev-master-key-change-me' -d '{\"date\":\"1988-08-01\",\"time\":\"12:00:00\",\"timezone\":\"+05:30\",\"latitude\":25.4358,\"longitude\":81.8463,\"houseSystem\":\"P\"}')",
+      "Bash(curl -s -X POST http://localhost:3000/api/v1/reports/generate -H 'Content-Type: application/json' -H 'x-api-key: dev-master-key-change-me' -d '{\"reportType\":\"vedic-birth-chart\",\"userId\":\"user_test\",\"natal\":{\"date\":\"1988-08-01\",\"time\":\"12:00:00\",\"timezone\":\"+05:30\",\"latitude\":25.4358,\"longitude\":81.8463}}')",
+      "Bash(curl -s -X POST http://localhost:3000/api/v1/transits -H 'Content-Type: application/json' -H 'x-api-key: dev-master-key-change-me' -d '{\"natal\":{\"date\":\"1988-08-01\",\"time\":\"12:00:00\",\"timezone\":\"+05:30\",\"latitude\":25.4358,\"longitude\":81.8463},\"transitDate\":\"2026-04-13\"}')",
+      "Bash(curl -s http://localhost:3000/api/v1/reports/1 -H 'x-api-key: dev-master-key-change-me')",
+      "Bash(lsof -ti:3000)",
+      "Bash(curl -s -X POST http://localhost:3000/api/v1/vedic/birth-chart -H 'Content-Type: application/json' -H 'x-api-key: dev-master-key-change-me' -d '{\"date\":\"1988-08-01\",\"time\":\"06:30:00\",\"timezone\":\"+05:30\",\"latitude\":25.4358,\"longitude\":81.8463,\"ayanamsa\":\"LAHIRI\",\"houseSystem\":\"W\"}')",
+      "Bash(curl -s -X POST http://localhost:3000/api/v1/western/birth-chart -H 'Content-Type: application/json' -H 'x-api-key: dev-master-key-change-me' -d '{\"date\":\"1988-08-01\",\"time\":\"06:30:00\",\"timezone\":\"+05:30\",\"latitude\":25.4358,\"longitude\":81.8463,\"houseSystem\":\"P\"}')",
+      "Bash(curl -s -X POST http://localhost:3000/api/v1/transits -H 'Content-Type: application/json' -H 'x-api-key: dev-master-key-change-me' -d '{\"natal\":{\"date\":\"1988-08-01\",\"time\":\"06:30:00\",\"timezone\":\"+05:30\",\"latitude\":25.4358,\"longitude\":81.8463},\"transitDate\":\"2026-04-15\",\"transitTime\":\"12:00:00\",\"transitTimezone\":\"+05:30\"}')",
+      "Bash(curl -s -X POST http://localhost:3000/api/v1/vedic/kundali/export/excel -H 'Content-Type: application/json' -H 'x-api-key: dev-master-key-change-me' -d '{\"date\":\"1988-08-01\",\"time\":\"06:30:00\",\"timezone\":\"+05:30\",\"latitude\":25.4358,\"longitude\":81.8463,\"ayanamsa\":\"LAHIRI\",\"houseSystem\":\"W\",\"transitDate\":\"2026-04-15\"}' -o /tmp/kundali.xlsx)",
+      "Bash(ls /Users/santoshkushwaha/dev/SohumAstroAPI/*.code-workspace)",
+      "Bash(gh auth:*)",
+      "Bash(git init:*)"
+    ]
+  }
+}

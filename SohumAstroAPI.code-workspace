@@ -1,0 +1,44 @@
+{
+  "folders": [
+    {
+      "name": "SohumAstroAPI",
+      "path": "."
+    }
+  ],
+  "settings": {
+    "typescript.tsdk": "node_modules/typescript/lib",
+    "editor.formatOnSave": true,
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "files.exclude": {
+      "node_modules": true,
+      "dist": true
+    },
+    "search.exclude": {
+      "node_modules": true,
+      "dist": true
+    }
+  },
+  "extensions": {
+    "recommendations": [
+      "dbaeumer.vscode-eslint",
+      "esbenp.prettier-vscode",
+      "prisma.prisma",
+      "ms-azuretools.vscode-docker"
+    ]
+  },
+  "launch": {
+    "version": "0.2.0",
+    "configurations": [
+      {
+        "name": "Debug Server",
+        "type": "node",
+        "request": "launch",
+        "runtimeExecutable": "npx",
+        "runtimeArgs": ["ts-node", "src/server.ts"],
+        "cwd": "${workspaceFolder}",
+        "env": { "NODE_ENV": "development" },
+        "skipFiles": ["<node_internals>/**"]
+      }
+    ]
+  }
+}
