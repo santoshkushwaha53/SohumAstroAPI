@@ -9,7 +9,7 @@ services:
     name: sohum-astro-api
     env: node
     region: singapore   # closest to India; change to oregon/frankfurt if preferred
-    plan: starter       # $7/mo — free plan sleeps after 15 min inactivity
+    plan: free          # sleeps after 15 min inactivity; wakes on first request
     branch: main
 
     buildCommand: npm ci && npx prisma generate && npm run build
@@ -74,7 +74,7 @@ services:
   - type: redis
     name: sohum-astro-redis
     region: singapore
-    plan: starter       # $10/mo; use free for dev (limited to 25MB)
+    plan: free          # 25MB RAM limit
     maxmemoryPolicy: allkeys-lru
     ipAllowList: []     # only allow internal Render network
 
@@ -82,6 +82,6 @@ services:
 databases:
   - name: sohum-astro-db
     region: singapore
-    plan: starter       # $7/mo; use free for dev (90-day expiry on free)
+    plan: free          # expires after 90 days on free tier
     databaseName: sohum_astro
     user: sohum_astro
