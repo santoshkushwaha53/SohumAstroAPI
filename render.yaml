@@ -12,7 +12,7 @@ services:
     plan: free          # sleeps after 15 min inactivity; wakes on first request
     branch: main
 
-    buildCommand: npm ci && npx prisma generate && npm run build
+    buildCommand: npm ci --include=dev && npx prisma generate && npm run build
     startCommand: sh scripts/start.sh
 
     healthCheckPath: /api/v1/health
